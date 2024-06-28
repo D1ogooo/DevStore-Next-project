@@ -1,7 +1,20 @@
+import { api } from "@/data/api";
 import Image from "next/image";
 import Link from "next/link";
 
+async function getFeaturedProducts() {
+  const res = await api('/products/featured')
+  const products = await res.json()
+  return products
+}
+
 export default async function Home() {
+  const products = await getFeaturedProducts()
+  if (products.length === 0) {
+    return <div>Failed to load products. Please try again later.</div>;
+  }
+  console.log(products)
+
   return (
     <div className="grid max-h-[53.75rem] grid-cols-9 grid-rows-6 gap-6 text-white">
       <Link
