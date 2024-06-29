@@ -4,9 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getFeaturedProducts(): Promise<Product[]> {
-  const res = await api('/products/featured');
-  const products = await res.json();
-  return products;
+  const res = await api('/products/featured', {
+   next: {
+    revalidate: 60 * 60, // 1 hora
+   }
+  })
+
+  const products = await res.json()
+
+  return products
 }
 
 export default async function Home() {
