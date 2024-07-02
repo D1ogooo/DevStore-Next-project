@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export function Header() {
-
   return (
    <div className="flex items-center justify-between color">
     <div className="flex items-center gap-5">
